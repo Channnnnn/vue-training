@@ -17,7 +17,6 @@
             >&#9200;: {{new Date(item.createDate).getHours()}}:{{new Date(item.createDate).getMinutes()}}</div>
           </span>
         </div>
-        </div>
       </div>
     </div>
   </div>
