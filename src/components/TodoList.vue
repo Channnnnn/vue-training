@@ -8,6 +8,7 @@
         type="text"
         placeholder="Insert the thing that you would like to do"
         v-model="inputContent"
+        @keyup.enter="addTodo(inputContent)"
       />
       <button @click="addTodo(inputContent)">
         Add&nbsp;
@@ -37,7 +38,7 @@
       </div>
     </div>
     <div class="actions">
-      <button>
+      <button @click="clearList()">
         Clear Done&nbsp;
         <i class="fas fa-boxes"></i>
       </button>
@@ -56,6 +57,7 @@ export default {
   },
   methods: {
     addTodo(content) {
+        if(content === "")return;
       this.$emit("addTodoItem", content);
       this.inputContent = "";
     },
@@ -64,6 +66,9 @@ export default {
     },
     deleteTodo(li){
         this.$emit("deleteTodo", li);
+    },
+    clearList(){
+        this.$emit('clearList');
     }
   },
   watch: {
@@ -76,9 +81,19 @@ export default {
 
 <style>
 .isDone {
-  text-decoration: line-through;
+  font-size: 4em;
+  line-height: 1em;
+  position: relative;
 }
-
+.isDone::after {
+  border-bottom: 0.125em solid rgb(88, 164, 252);
+  content: "";
+  left: 0;
+  margin-top: calc(0.125em / 2 * -1);
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
 .input-panel {
   display: flex;
   justify-content: center;
@@ -107,7 +122,7 @@ export default {
 }
 .list-panel {
   margin-top: 0.8rem;
-  height: 90%;
+  height: 80%;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -189,10 +204,9 @@ export default {
   text-align: left;
   font-size: 1.25rem;
   font-weight: 200;
-  width: 65%;
+  width: 60%;
 }
 .list-body .list-date {
-  width: 30%;
   font-size: 0.8rem;
   justify-content: center;
 }

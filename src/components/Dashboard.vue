@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Dashboard</h1>
+    <h1>&#128513;Here we go&#10024;</h1>
     <div class="tab-panel">
       <div class="tab-nav">
         <div @click="tabIndex=0" class="tab-nav-list" :class="{isActive : tabIndex===0}">
@@ -14,10 +14,10 @@
       </div>
       <div class="tab-content">
         <div v-if="tabIndex === 0" class="tab-body">
-          <TodoList @deleteTodo="deleteTodo" @markToggle="markToggle" @addTodoItem="addTodo" :todoList="todoList"></TodoList>
+          <TodoList @clearList="clearDoneList" @deleteTodo="deleteTodo" @markToggle="markToggle" @addTodoItem="addTodo" :todoList="todoList"></TodoList>
         </div>
         <div v-if="tabIndex === 1" class="tab-body">
-          <Archive></Archive>
+          <Archive :archiveList="archiveList"></Archive>
         </div>
       </div>
     </div>
@@ -67,6 +67,13 @@ export default {
     deleteTodo(li){
       this.todoList = this.todoList.filter(todo=>todo.id != li.id);
       this.storeTodoList();
+    },
+    clearDoneList(){
+      let doneList = this.todoList.filter(todo=>todo.done);
+      this.todoList = this.todoList.filter(todo=>!todo.done);
+      this.archiveList.push.apply(this.archiveList, doneList);
+      this.storeTodoList();
+      this.storeArchiveList();
     },
     getTodoList() {
       //todoList
@@ -151,7 +158,7 @@ export default {
 </script>
 
 <style>
-h1 {
+h1, h2 {
   text-transform: uppercase;
 }
 
