@@ -27,7 +27,7 @@
             <div class="date">{{new Date(item.createDate).toDateString()}}</div>
             <div
               class="time"
-            >&#9200;: {{new Date(item.createDate).getHours()}}:{{new Date(item.createDate).getMinutes()}}</div>
+            >&#9200;: {{new Date(item.createDate).getHours()}}:{{new Date(item.createDate).getMinutes().toString().padStart(2, "0")}}</div>
           </span>
         </div>
         <div class="list-action">
@@ -80,7 +80,10 @@ export default {
     // inputContent(curr, prev) {
     //   console.log(`${curr}, ${prev}`);
     // }
-  }
+  },
+  computed: {
+}
+
 };
 </script>
 

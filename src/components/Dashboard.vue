@@ -59,6 +59,8 @@ export default {
         done: false,
         createDate: Date.now()
       });
+    this.sortList();
+
     },
     markToggle(li){
       li.done = !li.done;
@@ -103,6 +105,9 @@ export default {
         localStorage.setItem("archiveList", JSON.stringify(this.archiveList));
       }
     },
+    sortList(){
+      this.todoList = this.todoList.sort((todo, _todo)=> todo.createDate < _todo.createDate ? -1 : todo.createDate > _todo.createDate ? 1 : 0).reverse();
+    },
     storageAvailable(type) {
       var storage;
       try {
@@ -145,6 +150,12 @@ export default {
     }
   },
   computed: {
+    // sortedTodoList(){
+    //   return this.todoList.sort((todo, _todo)=> todo.createDate < _todo.createDate ? -1 : todo.createDate > _todo.createDate ? 1 : 0)
+    // },
+    // sortedArchiveList(){
+    //   return this.archiveList.sort((todo, _todo)=> todo.createDate < _todo.createDate ? -1 : todo.createDate > _todo.createDate ? 1 : 0)
+    // }
   },
   created() {
     this.getTodoList();
