@@ -14,7 +14,7 @@
       </div>
       <div class="tab-content">
         <div v-if="tabIndex === 0" class="tab-body">
-          <TodoList @markToggle="markToggle" @addTodoItem="addTodo" :todoList="todoList"></TodoList>
+          <TodoList @deleteTodo="deleteTodo" @markToggle="markToggle" @addTodoItem="addTodo" :todoList="todoList"></TodoList>
         </div>
         <div v-if="tabIndex === 1" class="tab-body">
           <Archive></Archive>
@@ -63,8 +63,11 @@ export default {
     markToggle(li){
       li.done = !li.done;
       this.storeTodoList();
-    }
-    ,
+    },
+    deleteTodo(li){
+      this.todoList = this.todoList.filter(todo=>todo.id != li.id);
+      this.storeTodoList();
+    },
     getTodoList() {
       //todoList
       //get them form local storage

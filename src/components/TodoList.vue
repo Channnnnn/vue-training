@@ -30,7 +30,7 @@
             @click="markToggle(item)"
           >{{item.done ? '&#10006;': '&#10004;'}}</button>
           <!-- <button class="mark-undone" v-else @click="markToggle(item)"><i class="fas fa-times"></i></button> -->
-          <button class="delete">
+          <button class="delete" @click="deleteTodo(item)">
             <i class="fas fa-trash"></i>
           </button>
         </div>
@@ -61,6 +61,9 @@ export default {
     },
     markToggle(li) {
       this.$emit("markToggle", li);
+    },
+    deleteTodo(li){
+        this.$emit("deleteTodo", li);
     }
   },
   watch: {
