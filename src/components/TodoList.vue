@@ -23,7 +23,12 @@
             :class="{'num-done': item.done, 'num-undone': !item.done}"
           >{{index+1}}</span>&nbsp;
           <span class="list-content" :class="{isDone: item.done}">{{item.content}}</span>
-          <span class="list-date">{{new Date(item.createDate).toDateString()}}</span>
+          <span class="list-date">
+            <div class="date">{{new Date(item.createDate).toDateString()}}</div>
+            <div
+              class="time"
+            >&#9200;: {{new Date(item.createDate).getHours()}}:{{new Date(item.createDate).getMinutes()}}</div>
+          </span>
         </div>
         <div class="list-action">
           <button
@@ -57,18 +62,18 @@ export default {
   },
   methods: {
     addTodo(content) {
-        if(content === "")return;
+      if (content === "") return;
       this.$emit("addTodoItem", content);
       this.inputContent = "";
     },
     markToggle(li) {
       this.$emit("markToggle", li);
     },
-    deleteTodo(li){
-        this.$emit("deleteTodo", li);
+    deleteTodo(li) {
+      this.$emit("deleteTodo", li);
     },
-    clearList(){
-        this.$emit('clearList');
+    clearList() {
+      this.$emit("clearList");
     }
   },
   watch: {
@@ -183,7 +188,7 @@ export default {
   width: 80%;
 }
 .list-body > span {
-  padding: 0.6rem;
+  padding: 0.5rem;
   display: flex;
   align-items: center;
 }
@@ -207,8 +212,9 @@ export default {
   width: 60%;
 }
 .list-body .list-date {
+  flex-direction: column;
   font-size: 0.8rem;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .input-panel > button,

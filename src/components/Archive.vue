@@ -10,7 +10,13 @@
             class="list-number num-done"
           >{{index+1}}</span>&nbsp;
           <span class="list-content">{{item.content}}</span>
-          <span class="list-date">{{new Date(item.createDate).toDateString()}}</span>
+          <span class="list-date">
+            <div class="date">{{new Date(item.createDate).toDateString()}}</div>
+            <div
+              class="time"
+            >&#9200;: {{new Date(item.createDate).getHours()}}:{{new Date(item.createDate).getMinutes()}}</div>
+          </span>
+        </div>
         </div>
       </div>
     </div>
